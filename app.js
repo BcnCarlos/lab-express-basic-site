@@ -2,24 +2,26 @@ const express = require("express");
 
 const path = require("path");
 
+const hbs = require("hbs");
+
 const app = express();
+
+app.set("view engine", "hbs");
+
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.all("/", (request, response) => {
-  response.sendFile(path.join(__dirname, "views", "home.html"));
-});
-
 app.all("/home", (request, response) => {
-  response.sendFile(path.join(__dirname, "views", "home.html"));
+  response.render("home");
 });
 
 app.all("/about", (request, response) => {
-  response.sendFile(path.join(__dirname, "views", "about.html"));
+  response.render("about");
 });
 
 app.all("/works", (request, response) => {
-  response.sendFile(path.join(__dirname, "views", "works.html"));
+  response.render("works");
 });
 
 app.listen(4000, () => {
